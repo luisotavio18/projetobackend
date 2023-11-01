@@ -442,3 +442,426 @@ app.listen(port, () => {
 ```
 npm run start
 ```
+
+<img src="../assets/npm_start_1.png">
+
+#### Atualizar projeto no gitHub
+* Adicionar todos arquivos ao versionamento
+```
+git add .
+```
+
+* Salvar projeto e escrever comentário sobre o processo realizado
+```
+git commit -m 'configuração do projeto'
+```
+
+* Enviar os arquivos atualizados para o gitHub
+```
+git push
+```
+
+### Atualize a página no gitHub e verifique se os arquivos foram atualizados 
+* Com o projeto no servidor remoto podemos remover os arquivos na nossa máquina
+```
+cd ..
+```
+* Comando para acessar uma pasta anterior
+* Fechar o VSCode com o projeto aberto
+
+```
+rm -rf projetoBackend
+```
+* rm (remove): comando utilizado para apagar arquivo
+* -r (recursive): apaga pastas e subpastas de forma recursiva
+* -f (force): não pergunta confirmações
+* projetoBackend: nome da pasta que contem os arquivos da aplicação
+
+## Conclusão do Passo 2
+#### URL do repositório com:
+ * Estrutura do projeto 
+ * Arquivo readme de documentação dos passos realizados
+ * Configuração 
+ * Retorno de teste da API
+
+#### Enviar a URL na tarefa do teams
+ * Tarefa 2 - Configuração inicial
+
+ # 3º Passo: Clonar o projeto do gitHub, criar a configuração do arquivo de rotas
+
+* Comando clone do git
+* Configurar arquivo routes
+
+<hr>
+
+#### Copiar a url do projeto
+
+* Acessar repositório do projeto no gitHub
+* Clicar no botão verde '<> Code'
+* Clicar no ícone para copiar a URL, conforme a imagem
+
+<img src="../assets/clone_repo.png">
+
+#### Clonar o repositório na sua máquina
+
+* Abrir o gitBash em um local do computador
+* Digitar o comando 'git clone' junto com a URL do seu repositório
+
+```
+git clone URL_REPOSITORIO
+```
+
+<img src="../assets/git_clone.png">
+
+#### Acessar pasta
+* Digitar o comando 'cd' e o nome do seu repositório
+* cd (change directory): acessar outra pasta
+```
+cd NOME_REPOSITORIO
+```
+
+<img src="../assets/cd_projeto.png">
+
+#### Reinstalar os pacotes da aplicação
+```
+npm i
+```
+* Este comando irá recriar a pasta node_modules no projeto
+
+#### Criar arquivo dentro da pasta routes
+```
+touch src/routes/rotas.js
+```
+* Responsável pelas rotas que serão acessadas na API
+
+#### Abrir o VSCode
+```
+code .
+```
+
+#### Abrir o arquivo rotas.js e digitar os códigos
+```
+// Importar o modulo de Router do express
+const { Router } = require('express');
+
+// Instanciar o Router na variável router
+const router = Router();
+
+router.get('/listar', (request, response) => {
+    response.send('Método GET: listar informações');
+});
+router.post('/cadastrar', (request, response) => {
+    response.send('Método POST: salvar informações');
+});
+router.put('/user/:id', (request, response) => {
+    response.send('Método PUT: atualizar informações');
+});
+router.delete('/user/:id', (request, response) => {
+    response.send('Método DELETE: remover informações');
+});
+
+module.exports = router;
+```
+
+#### Abrir o arquivo app.js e adicionar o código
+* Precisamos importar o arquivo de rotas nas configurações da API
+```
+const router = require('./routes/rotas');
+```
+
+* Habilitar as rotas na aplicação
+* Esta linha deve inserida depois da criação da variável app
+```
+app.use('/api', router);
+```
+
+#### Atualizar projeto no gitHub
+* Adicionar todos arquivos ao versionamento
+```
+git add .
+```
+
+* Salvar projeto e escrever comentário sobre o processo realizado
+```
+git commit -m 'rotas do projeto'
+```
+
+* Enviar os arquivos atualizados para o gitHub
+```
+git push
+```
+
+### Atualize a página no gitHub e verifique se os arquivos foram atualizados 
+* Com o projeto no servidor remoto podemos remover os arquivos na nossa máquina
+```
+cd ..
+```
+* Comando para acessar uma pasta anterior
+* Fechar o VSCode com o projeto aberto
+
+```
+rm -rf projetoBackend
+```
+* rm (remove): comando utilizado para apagar arquivo
+* -r (recursive): apaga pastas e subpastas de forma recursiva
+* -f (force): não pergunta confirmações
+* projetoBackend: nome da pasta que contem os arquivos da aplicação
+
+## Conclusão do Passo 3
+#### URL do repositório com:
+ * Estrutura do projeto 
+ * Arquivo readme de documentação dos passos realizados
+ * Configuração 
+ * Retorno de teste da API
+ * Arquivo de rotas com os métodos [GET, POST, PUT, DELETE]
+
+#### Enviar a URL na tarefa do teams
+ * Tarefa 3 - Configuração de rotas
+
+# 4º Passo: Testar rotas da API com o Insomnia
+
+* Copiar url do repositório no gitHub
+* Clonar repositório no computador com o gitBash
+* Abrir o projeto no VSCode
+* Aprender a utilizar o insomnia
+
+<hr>
+
+#### Clonar o repositório na sua máquina
+
+* Abrir o gitBash em um local do computador
+* Digitar o comando 'git clone' junto com a URL do seu repositório
+
+```
+git clone URL_REPOSITORIO
+```
+
+<img src="../assets/git_clone.png">
+
+#### Acessar pasta
+* Digitar o comando 'cd' e o nome do seu repositório
+* cd (change directory): acessar outra pasta
+```
+cd NOME_REPOSITORIO
+```
+
+<img src="../assets/cd_projeto.png">
+
+#### Reinstalar os pacotes da aplicação
+```
+npm i
+```
+* Este comando irá recriar a pasta node_modules no projeto
+
+#### Recriar arquivo .env
+* Definir as variáveis no arquivo .env a partir das chaves definidas no arquivo .env.example
+
+#### Com o passo 3 finalizado podemos testar os endpoints (rotas) da API
+
+## Insomnia
+
+Quando você está criando sua API, vai precisar testar as rotas que serão criadas no projeto, é possível utilizar o próprio browser para testar, mas ele só pode enviar requisições do tipo get, e os dados retornados não são apresentados já formatados. Para usar as outras requisições como post, put e delete, será necessário usar softwares de terceiros, e nesse caso, é o insomnia. Ele é um programa open source feito em javascript. O programa é um testador de rotas para APIs, como todos os outros (por exemplo o postman), você coloca a url da API e o caminho da rota
+
+#### Agora abra o insomnia no seu computador
+
+* Vamos um novo projeto clicando no ícone indicado pela seta, conforme a imagem abaixo
+
+<img src="../assets/create_project.png">
+
+* Agora precisamos dar um nome para esse projeto, a imagem a seguir sugere o nome 'Projeto API'
+* Defina o nome do projeto e clique no botão 'Create'
+
+<img src="../assets/rename_project.png">
+
+* Com o projeto criado, precisamos criar uma coleção de requisições para esse projeto
+* Clique no botão 'New Collection', conforme indicação da imagem a abaixo
+
+<img src="../assets/new_colletion.png">
+
+* Agora precisamos dar um nome para essa coleção, a imagem a seguir sugere o nome 'Testar rotas do passo 3'
+* Defina o nome da coleção e clique no botão 'Create'
+
+<img src="../assets/rename_collection.png">
+
+* Agora estamos dentro do projeto 'Projeto API / Testar rotas do Passo 3'
+* Vamos criar a primeira requisição para a API clicando no botão 'New HTTP Request', indicado na tela a seguir  
+* Será criar uma nova requisição no método GET
+
+<img src="../assets/http_request.png">
+
+
+* Todas as requisições desta coleção ficaram listadas neste quadro da esquerda conforme a imagem
+* Podemos alterar o nome da requisição clicando no ícone de seta para baixo e selecionando a opção 'Rename'
+* É importante renomear as requisições para deixarmos personalizadas e com a descrição de responsabilidade da requisição
+
+<img src="../assets/http_request_rename.png">
+
+* Podemos adicionar outras requisições clicando no ícone conforme imagem abaixo
+* Por padrão a requisição é criada no método GET
+
+<img src="../assets/http_request_add.png">
+
+* Podemos alterar o método da requisição clicando no íconde de seta para baixo, conforme a imagem abaixo
+
+<img src="../assets/http_request_alter.png">
+
+* Agora só precisamos descrever a url da nossa API com a porta que definimos (http://localhost:3000) e as rotas (/api/listar) que criamos no arquivo rotas.js do passo 3
+
+<img src="../assets/http_request_endpoint.png">
+
+## ATENÇÃO
+
+#### Antes de clicar no botão 'Send' para executar a ação da rota, execute o comando 'npm start' no seu projeto para rodar a API e verifique se o retorno estará conforme a imagem a seguir, ou seja, rodando na porta definida para o servidor
+
+<img src="../assets/npm_start_1.png">
+
+* Após validar que a API esta rodando, executa a ação da rota clicando no botão 'Send'
+
+* O Insomnia deverá retornar a mensagem descrita no método GET do nosso arquivo de rotas
+
+<img src="../assets/http_request_get.png">
+
+## TAREFA
+
+#### Criar as outras 3 requisições para os métodos POST, PUT e DELETE para exibir os conteúdos de cada método criado no arquivo de rotas da API
+
+## Conclusão do Passo 4
+#### URL do repositório com:
+ * Estrutura do projeto 
+ * Arquivo readme de documentação dos passos realizados
+ * Configuração 
+ * Retorno de teste da API
+ * Arquivo de rotas com os métodos [GET, POST, PUT, DELETE]
+ * Imagem de cada método testado no Insomnia dentro do arquivo readme, conforme exibido na conclusão do passo 4
+
+#### Enviar a URL na tarefa do teams
+ * Tarefa 4 - Testando rotas com insomnia
+
+## resultados de cada teste api 
+
+
+    ('Método GET: listar informações');
+
+
+    ('Método POST: salvar informações');
+
+
+    ('Método PUT: atualizar informações');
+
+
+    ('Método DELETE: remover informações');
+
+# 5º Passo: Criar controllers para gerenciar as requisições das rotas
+
+* Copiar url do repositório no gitHub
+* Clonar repositório no computador com o gitBash
+* Abrir o projeto no VSCode
+
+<hr>
+
+#### Clonar o repositório na sua máquina
+
+* Abrir o gitBash em um local do computador
+* Digitar o comando 'git clone' junto com a URL do seu repositório
+
+```
+git clone URL_REPOSITORIO
+```
+
+<img src="../assets/git_clone.png">
+
+#### Acessar pasta
+* Digitar o comando 'cd' e o nome do seu repositório
+* cd (change directory): acessar outra pasta
+```
+cd NOME_REPOSITORIO
+```
+
+<img src="../assets/cd_projeto.png">
+
+#### Reinstalar os pacotes da aplicação
+```
+npm i
+```
+* Este comando irá recriar a pasta node_modules no projeto
+
+#### Recriar arquivo .env
+* Definir as variáveis no arquivo .env a partir das chaves definidas no arquivo .env.example
+
+#### Criar pasta 'controllers' dentro da pasta 'src'
+```
+mkdir src/controllers
+```
+#### Criar arquivo 'crudController.js' na pasta 'controllers'
+```
+touch src/controllers/crudController.js
+```
+#### Colar os códigos no arquivo crudController.js
+```
+function listarDados(request, response) {
+    response.send('Retorno de lista de informação do Banco de dados');
+}
+
+function gravarDados(request, response) {
+    response.send('Método utilizado para salvar informações!');
+}
+
+function atualizarDados(request, response) {
+    response.send('Método utilizado para editar informações!');
+}
+
+function deletarDados(request, response) {
+    response.send('Método utilizado para deletar informações!');
+}
+
+module.exports = {
+    listarDados,
+    gravarDados, 
+    atualizarDados, 
+    deletarDados
+}
+```
+
+#### Alterar o arquivo 'rotas.js'
+```
+// Importar pacote do express
+const { Router } = require('express');
+// Instanciar o Router na variavel router
+const router = Router();
+// Importar funções do controller para a rota acessar as funções
+const { 
+    listarDados,
+    gravarDados,
+    atualizarDados,
+    deletarDados
+ } = require('../controllers/crudController');
+
+router.get('/listar', listarDados);
+
+router.post('/gravar', gravarDados);
+
+router.put('/atualizar/:id', atualizarDados);
+
+router.delete('/deletar/:id', deletarDados);
+
+module.exports = router;
+```
+
+## TAREFA
+- Rodar o camando 'npm start' para subir o servidor
+- Validar que o servidor continua rodando com últimas alterações
+- Abrir o insomnia 
+- Testar as 4 requisições para os métodos GET, POST, PUT e DELETE e validar os conteúdos de cada rota retornados pelas funções do 'crudController'
+
+## Conclusão do Passo 5
+#### URL do repositório com:
+ * Estrutura do projeto 
+ * Arquivo readme de documentação dos passos realizados
+ * Configuração 
+ * Retorno de teste da API
+ * Arquivo de rotas com os métodos [GET, POST, PUT, DELETE]
+ * Arquivo com as funções de controller
+ * Imagem de cada método testado no Insomnia dentro do arquivo readme, conforme exibido na conclusão do passo 4
+
+#### Enviar a URL na tarefa do teams
+ * Tarefa 5 - Criando controllers da API
